@@ -27,4 +27,6 @@ void printerror(char *name, char *cmd, int idx);
 char *_itoa(int num);
 
 void wait_print(int *status, char *prompt);
+void execute(ssize_t input_count, char **av, char *command);
+
 #endif
