@@ -11,7 +11,10 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>
+
 extern char **environ;
+
+
 char *read_line(void);
 char **tokenizer(char *line);
 char *_strdup(char *str);
@@ -20,6 +23,6 @@ void free2DArray(char **array2d);
 char *_getenv(char *var);
 char *_getpath(char *command);
 void reverse_string(char *str, int len);
-void printerror(char *name,char *cmd,int idx);
+void printerror(char *name, char *cmd, int idx);
 char *_itoa(int num);
 #endif
