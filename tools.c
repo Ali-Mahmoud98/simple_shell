@@ -14,6 +14,7 @@ char *_itoa(int num)
 	if (num == 0)
 		buf[i++] = '0';
 	else
+	{
 		while (num > 0)
 		{
 			buf[i++] = (num % 10) + '0';
@@ -22,6 +23,8 @@ char *_itoa(int num)
 		buf[i] = '\0';
 		reverse_string(buf, i);
 		return (_strdup(buf));
+	}
+	return (NULL);
 }
 
 /**

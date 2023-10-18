@@ -9,8 +9,9 @@ char *_getpath(char *command)
 {
 	char *path_env, *full_cmd, *dir;
 	struct stat st;
+	int i;
 
-	for (int i = 0; command[i]; i++)
+	for (i = 0; command[i]; i++)
 	{
 		if (command[i] == '/')
 		{

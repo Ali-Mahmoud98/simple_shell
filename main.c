@@ -8,7 +8,6 @@
  */
 int main(int ac, char **av)
 {
-	pid_t pid;
 	char *line = NULL;
 	char **command;
 	int status = 0, idx = 0;
