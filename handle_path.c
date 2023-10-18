@@ -7,42 +7,27 @@
  */
 char *_getpath(char *command)
 {
-	char *path_env, *full_cmd, *dir;
-	struct stat st;
-	int i;
+	int i, k = 0;
+	char *path = "/bin/";
+	char *command_path;
 
-	for (i = 0; command[i]; i++)
+	if ((strncmp(command, "/bin/", 5) != 0) &&
+			(strncmp(command, "/usr/bin/", 9) != 0))
 	{
-		if (command[i] == '/')
-		{
-			if (stat(command, &st) == 0)
-				return (_strdup(command));
+		command_path = malloc(sizeof(char) * (5 + strlen(command) + 1));
+		if (command_path == NULL)
 			return (NULL);
-		}
-	}
 
-	path_env = _getenv("PATH");
-	if (!path_env)
-	return (NULL);
+		for (i = 0; path[i] != '\0'; i++)
+			command_path[i] = path[i];
 
-	dir = strtok(path_env, ":");
-	while (dir)
-	{
-		full_cmd = malloc(strlen(dir) + strlen(command) + 2);
-		if (full_cmd)
+		for (k = 0; command[k] != '\0'; k++)
 		{
-			strcpy(full_cmd, dir);
-			strcat(full_cmd, "/");
-			strcat(full_cmd, command);
-			if (stat(full_cmd, &st) == 0)
-			{
-				free(path_env);
-				return (full_cmd);
-			}
-			free(full_cmd);
-			dir = strtok(NULL, ":");
+			command_path[i] = command[k];
+			i++;
 		}
+		command_path[i] = '\0';
+		return (command_path);
 	}
-	free(path_env);
-	return (NULL);
+	return (command);
 }
