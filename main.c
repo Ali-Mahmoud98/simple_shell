@@ -6,29 +6,51 @@
  *
  * Return: Always returns 0.
  */
-int main(int ac, char **av)
+int main(int ac __attribute__((unused)), char **av)
 {
-	char *line = NULL;
-	char **command;
-	int status = 0, idx = 0;
-	(void) ac;
+	ssize_t input_count;
+	char *command = NULL;
+	size_t command_size = 0;
+	char **command_args;
+	pid_t child_pid;
+	int status, i;
 
-	while (1)
+	printf("cisfun$ ");
+	while ((input_count = getline(&command, &command_size, stdin)) != EOF)
 	{
-		write(1, "$ ", 2);
-		line = read_line();
-		if (line == NULL)
+		if (command[input_count - 1] == '\n')
+			command[input_count - 1] = '\0';
+		if (strcmp(command, "exit") == 0)
+			exit(98);
+		command = _getpath(command);
+		command_args = tokenizer(command);
+		child_pid = fork();
+		if (child_pid == -1)
 		{
-			if (STDIN_FILENO)
-				write(STDIN_FILENO, "\n", 1);
-			return (status);
+			printf("fork ERROR\n");
+			return (-1);
 		}
-		idx++;
-		command = tokenizer(line);
-		if (!command)
-		continue;
-
-		status = _execute(command, av, idx);
+		else if (child_pid == 0)
+		{
+			/*if (_strcmp(command, "env") == 0)
+				_getenv();*/
+			i = execve(command_args[0], command_args, environ);
+			if (i == -1)
+			{
+				printf("%s: No such file or directory\n", av[0]);
+				_exit(99);
+			}
+		}
+		else
+			wait_print(&status, "cisfun$");
+		if (command_args != NULL)
+		{
+			free2DArray(command_args);
+		}
 	}
-
+	if (command != NULL)
+	{
+		free(command);
+	}
+	return (0);
 }
