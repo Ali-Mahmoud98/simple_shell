@@ -4,16 +4,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <limits.h>
 #include <fcntl.h>
 #include <errno.h>
 
 extern char **environ;
-
 
 char *read_line(void);
 char **tokenizer(char *line);
@@ -25,4 +25,6 @@ char *_getpath(char *command);
 void reverse_string(char *str, int len);
 void printerror(char *name, char *cmd, int idx);
 char *_itoa(int num);
+
+void wait_print(int *status, char *prompt);
 #endif
