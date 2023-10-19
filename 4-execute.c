@@ -13,8 +13,6 @@ int _execute(char **command, char **argv, int idx)
 	pid_t pid;
 	int status;
 
-	pid = fork();
-
 	full_cmd = _getpath(command[0]);
 	if (!full_cmd)
 	{
@@ -23,6 +21,7 @@ int _execute(char **command, char **argv, int idx)
 		return (127);
 	}
 
+	pid = fork();
 	if (pid == 0)
 	{
 		if (execve(full_cmd, command, environ) == -1)

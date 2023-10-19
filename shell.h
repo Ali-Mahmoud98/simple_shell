@@ -22,4 +22,10 @@ char *_getpath(char *command);
 void reverse_string(char *str, int len);
 void printerror(char *name,char *cmd,int idx);
 char *_itoa(int num);
+int is_builtin(char *command);
+void handle_builtin(char **command, char **argv, int *status, int idx);
+void exit_shell(char **command, char **argv, int *status, int idx);
+void print_env(char **command, int *status);
+int is_positive_number(char *str);
+
 #endif

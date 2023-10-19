@@ -12,8 +12,12 @@ char *_itoa(int num)
 	char buf[20];
 
 	if (num == 0)
+	{
 		buf[i++] = '0';
+		buf[i] = '\0';
+	}
 	else
+	{
 		while (num > 0)
 		{
 			buf[i++] = (num % 10) + '0';
@@ -22,6 +26,8 @@ char *_itoa(int num)
 		buf[i] = '\0';
 		reverse_string(buf, i);
 		return (_strdup(buf));
+	}
+	return (_strdup(buf));
 }
 
 /**
@@ -54,7 +60,7 @@ void reverse_string(char *str, int len)
  */
 void printerror(char *name, char *cmd, int idx)
 {
-	char *index, mssg[] = ": not found";
+	char *index, mssg[] = ": not found\n";
 
 	index = _itoa(idx);
 	write(STDERR_FILENO, name, strlen(name));
@@ -65,4 +71,24 @@ void printerror(char *name, char *cmd, int idx)
 	write(STDERR_FILENO, cmd, strlen(cmd));
 	write(STDERR_FILENO, mssg, strlen(mssg));
 	free(index);
+}
+
+/**
+ * is_positive_number - Check if a string represents a positive number.
+ * @str: The string to be checked.
+ *
+ * Return: 1 if 'str' is a positive number, 0 otherwise.
+ */
+int is_positive_number(char *str)
+{
+	int i;
+
+	if (!str)
+		return (0);
+	for (i = 0; str[i]; i++)
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+	}
+	return (1);
 }

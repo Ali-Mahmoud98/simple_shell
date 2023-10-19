@@ -8,7 +8,6 @@
  */
 int main(int ac, char **av)
 {
-	pid_t pid;
 	char *line = NULL;
 	char **command;
 	int status = 0, idx = 0;
@@ -16,20 +15,22 @@ int main(int ac, char **av)
 
 	while (1)
 	{
-		write(1, "$ ", 2);
 		line = read_line();
 		if (line == NULL)
 		{
-			if (STDIN_FILENO)
-				write(STDIN_FILENO, "\n", 1);
+			if (isatty(STDIN_FILENO))
+				write(STDOUT_FILENO, "\n", 1);
 			return (status);
 		}
 		idx++;
+
 		command = tokenizer(line);
 		if (!command)
 		continue;
-
-		status = _execute(command, av, idx);
+		if (is_builtin(command[0]))
+		handle_builtin(command, av, &status, idx);
+		else
+			status = _execute(command, av, idx);
 	}
 
 }

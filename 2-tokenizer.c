@@ -13,24 +13,26 @@ char **tokenizer(char *line)
 
 	if (!line)
 		return (NULL);
-
 	line_cpy = _strdup(line);
-
 	token = strtok(line_cpy, DELIM);
+	if (token == NULL)
+	{
+		free(line);
+		free(line_cpy);
+		return (NULL);
+	}
 	while (token)
 	{
 		ac++;
 		token = strtok(NULL, DELIM);
 	}
 	free(line_cpy), line_cpy = NULL;
-
 	command = malloc(sizeof(char *) * (ac + 1));
 	if (!command)
 	{
 		free(line), line = NULL;
 		return (NULL);
 	}
-
 	token = strtok(line, DELIM);
 	while (token)
 	{

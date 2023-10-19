@@ -23,6 +23,7 @@ char *_getenv(char *var)
 			return (env);
 		}
 	free(tmp);
+	tmp = NULL;
 	}
 	return (NULL);
 }
