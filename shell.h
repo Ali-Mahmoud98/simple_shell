@@ -6,6 +6,12 @@
 
 int _putchar(char c);
 char *read_line(void);
+ssize_t input_buf(info_t *info, char **buf, size_t *len);
+ssize_t get_input(info_t *info);
+ssize_t read_buf(info_t *info, char *buf, size_t *i);
+int _getline(info_t *info, char **ptr, size_t *length);
+void sigintHandler(__attribute__((unused))int sig_num);
+
 char *starts_with(const char *haystack, const char *needle);
 char **tokenizer(char *line);
 char **strtow(char *str, char *d);
@@ -50,16 +56,16 @@ int _setenv(info_t *info, char *var, char *value);
 
 /*Start history functions*/
 char *get_history_file(info_t *info);
-int write_history(info_t *info)
+int write_history(info_t *info);
 int read_history(info_t *info);
 int build_history_list(info_t *info, char *buf, int linecount);
-int renumber_history(info_t *info)
+int renumber_history(info_t *info);
 /*end history functions*/
 
 /*start list functions*/
 list_t *push_front(list_t **head, const char *str, int num);
-list_t *push_back(list_t **head, const char *str, int num)
-size_t print_list_str(const list_t *h)
+list_t *push_back(list_t **head, const char *str, int num);
+size_t print_list_str(const list_t *h);
 int delete_node_at_index(list_t **head, unsigned int index);
 void free_list(list_t **head_ptr);
 size_t list_len(const list_t *h);
@@ -79,6 +85,9 @@ int alias(info_t *info);
 int exit(info_t *info);
 int cd(info_t *info);
 int help(info_t *info);
+int is_cmd(info_t *info, char *path);
+char *dup_chars(char *pathstr, int start, int stop);
+char *find_path(info_t *info, char *pathstr, char *cmd);
 /*End Shell functions*/
 
 /*Start utils functions*/
@@ -89,7 +98,7 @@ int _atoi(char *s);
 char *_memset(char *s, char b, unsigned int n);
 void ffree(char **pp);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-int bfree(void **ptr)
+int bfree(void **ptr);
 /*End utils functions*/
 
 /*Start Chaining and variables*/
@@ -100,5 +109,10 @@ int replace_string(char **old, char *new);
 int replace_vars(info_t *info);
 /*End Chaining and variables*/
 
+/*Start information functions*/
+void clear_info(info_t *info);
+void set_info(info_t *info, char **av);
+void free_info(info_t *info, int all);
+/*end information functions*/
 
 #endif
