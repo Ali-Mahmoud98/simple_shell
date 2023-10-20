@@ -86,6 +86,19 @@ int interactive(info_t *info);
 int is_delim(char c, char *delim);
 int _isalpha(int c);
 int _atoi(char *s);
+char *_memset(char *s, char b, unsigned int n);
+void ffree(char **pp);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+int bfree(void **ptr)
 /*End utils functions*/
+
+/*Start Chaining and variables*/
+int is_chain(info_t *info, char *buf, size_t *p);
+void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len);
+int replace_alias(info_t *info);
+int replace_string(char **old, char *new);
+int replace_vars(info_t *info);
+/*End Chaining and variables*/
+
 
 #endif
