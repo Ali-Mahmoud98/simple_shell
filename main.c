@@ -33,6 +33,6 @@ int main(int ac, char **av)
 	}
 	_env_list(info);
 	read_history(info);
-	hsh(info, av);
+	my_shell(info, av);
 	return (0);
 }

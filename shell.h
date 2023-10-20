@@ -4,9 +4,12 @@
 #include "LIBs_Macros.h"
 #include "structs.h"
 
+int _putchar(char c);
 char *read_line(void);
-char *starts_with(const char *haystack, const char *needle)
+char *starts_with(const char *haystack, const char *needle);
 char **tokenizer(char *line);
+char **strtow(char *str, char *d);
+char **strtow2(char *str, char d);
 char *_strdup(char *str);
 int _execute(char **command, char **argv, int idx);
 void free2DArray(char **array2d);
@@ -26,6 +29,12 @@ void _eputs(char *);
 int _eputchar(char);
 int _putfd(char c, int fd);
 int _putsfd(char *str, int fd);
+int _erratoi(char *s);
+void print_error(info_t *info, char *estr);
+int print_d(int input, int fd);
+int print_d(int input, int fd);
+char *convert_number(long int num, int base, int flags);
+void remove_comments(char *buf);
 /*end error functions*/
 
 /*start environmemt functions*/
@@ -53,6 +62,30 @@ list_t *push_back(list_t **head, const char *str, int num)
 size_t print_list_str(const list_t *h)
 int delete_node_at_index(list_t **head, unsigned int index);
 void free_list(list_t **head_ptr);
+size_t list_len(const list_t *h);
+char **list_to_strings(list_t *head);
+size_t print_list(const list_t *h);
+list_t *node_starts_with(list_t *node, char *prefix, char c);
+ssize_t get_node_index(list_t *head, list_t *node);
 /*end list functions*/
+
+/*Start Shell functions*/
+int my_shell(info_t *info, char **av);
+int history(info_t *info);
+int unset_alias(info_t *info, char *str);
+int set_alias(info_t *info, char *str);
+int print_alias(list_t *node);
+int alias(info_t *info);
+int exit(info_t *info);
+int cd(info_t *info);
+int help(info_t *info);
+/*End Shell functions*/
+
+/*Start utils functions*/
+int interactive(info_t *info);
+int is_delim(char c, char *delim);
+int _isalpha(int c);
+int _atoi(char *s);
+/*End utils functions*/
 
 #endif
