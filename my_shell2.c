@@ -71,10 +71,10 @@ int print_alias(list_t *node)
 	{
 		p = strchr(node->str, '=');
 		for (a = node->str; a <= p; a++)
-			putchar(*a);
-		putchar('\'');
-		puts(p + 1);
-		puts("'\n");
+			_putchar(*a);
+		_putchar('\'');
+		_puts(p + 1);
+		_puts("'\n");
 		return (0);
 	}
 	return (1);

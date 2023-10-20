@@ -28,6 +28,7 @@ char *starts_with(const char *haystack, const char *needle)
 int _env(info_t *info)
 {
 	print_list_str(info->env);
+	_putchar(BUF_FLUSH);
 	return (1);
 }
 
