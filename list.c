@@ -38,7 +38,7 @@ char **list_to_strings(list_t *head)
 		return (NULL);
 	for (i = 0; node; node = node->next, i++)
 	{
-		str = malloc(_strlen(node->str) + 1);
+		str = malloc(strlen(node->str) + 1);
 		if (!str)
 		{
 			for (j = 0; j < i; j++)
@@ -47,7 +47,7 @@ char **list_to_strings(list_t *head)
 			return (NULL);
 		}
 
-		str = _strcpy(str, node->str);
+		str = strcpy(str, node->str);
 		strs[i] = str;
 	}
 	strs[i] = NULL;
@@ -67,11 +67,11 @@ size_t print_list(const list_t *h)
 
 	while (h)
 	{
-		_puts(convert_number(h->num, 10, 0));
+		puts(convert_number(h->num, 10, 0));
 		_putchar(':');
 		_putchar(' ');
-		_puts(h->str ? h->str : "(nil)");
-		_puts("\n");
+		puts(h->str ? h->str : "(nil)");
+		puts("\n");
 		h = h->next;
 		i++;
 	}

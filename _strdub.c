@@ -5,20 +5,21 @@
  *
  * Return: A pointer to the duplicated string, or NULL on failure.
  */
-char *_strdup(char *str)
+char *_strdup(const char *str)
 {
-	char *dest = NULL;
+	int length = 0;
+	char *ret;
 
-	if (!str)
+	if (str == NULL)
 		return (NULL);
-
-	dest = malloc(sizeof(char) * (strlen(str) + 1));
-	if (!dest)
-	{
+	while (*str++)
+		length++;
+	ret = malloc(sizeof(char) * (length + 1));
+	if (!ret)
 		return (NULL);
-	}
-	strcpy(dest, str);
-	return (dest);
+	for (length++; length--;)
+		ret[length] = *--str;
+	return (ret);
 }
 
 /**

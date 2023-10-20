@@ -25,9 +25,10 @@ char *starts_with(const char *haystack, const char *needle)
  * If the 'info' parameter is 'NULL', no action is taken.
  *
  */
-void _env(info_t *info)
+int _env(info_t *info)
 {
 	print_list_str(info->env);
+	return (1);
 }
 
 /**

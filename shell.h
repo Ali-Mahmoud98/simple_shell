@@ -16,7 +16,7 @@ char *starts_with(const char *haystack, const char *needle);
 char **tokenizer(char *line);
 char **strtow(char *str, char *d);
 char **strtow2(char *str, char d);
-char *_strdup(char *str);
+char *_strdup(const char *str);
 int _execute(char **command, char **argv, int idx);
 void free2DArray(char **array2d);
 
@@ -45,7 +45,7 @@ void remove_comments(char *buf);
 
 /*start environmemt functions*/
 char *_getenv(info_t *, const char *);
-void _env(info_t *);
+int _env(info_t *info);
 int _mysetenv(info_t *);
 int _myunsetenv(info_t *);
 int _env_list(info_t *);
@@ -82,12 +82,15 @@ int unset_alias(info_t *info, char *str);
 int set_alias(info_t *info, char *str);
 int print_alias(list_t *node);
 int alias(info_t *info);
-int exit(info_t *info);
-int cd(info_t *info);
-int help(info_t *info);
+int sh_exit(info_t *info);
+int _cd(info_t *info);
+int _help(info_t *info);
 int is_cmd(info_t *info, char *path);
 char *dup_chars(char *pathstr, int start, int stop);
 char *find_path(info_t *info, char *pathstr, char *cmd);
+int find_builtin(info_t *info);
+void find_cmd(info_t *info);
+void fork_cmd(info_t *info);
 /*End Shell functions*/
 
 /*Start utils functions*/

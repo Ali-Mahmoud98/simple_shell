@@ -25,7 +25,7 @@ int unset_alias(info_t *info, char *str)
 	char *p, c;
 	int ret;
 
-	p = _strchr(str, '=');
+	p = strchr(str, '=');
 	if (!p)
 		return (1);
 	c = *p;
