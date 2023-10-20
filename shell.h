@@ -22,6 +22,7 @@ void free2DArray(char **array2d);
 
 char *_getpath(char *command);
 void reverse_string(char *str, int len);
+void _puts(char *str);
 void printerror(char *name, char *cmd, int idx);
 char *_itoa(int num);
 int is_builtin(char *command);
