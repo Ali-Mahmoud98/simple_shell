@@ -6,34 +6,33 @@
  *
  * Return: Always returns 0.
  */
-int main(int ac __attribute__((unused)), char **av)
+int main(int ac, char **av)
 {
-	char *line = NULL;
-	char **command;
-	int status = 0, idx = 0;
+	info_t info[] = { INFO_INIT };
+	int fd = 5;
 
-	while (1)
+	if (ac == 2)
 	{
-		line = read_line();
-		if (line == NULL)
+		fd = open(av[1], O_RDONLY);
+		if (fd == -1)
 		{
-			if (isatty(STDIN_FILENO))
-				write(STDOUT_FILENO, "\n", 1);
-			return (status);
+			if (errno == EACCES)
+				exit(126);
+			if (errno == ENOENT)
+			{
+				_eputs(av[0]);
+				_eputs(": 0: Can't open ");
+				_eputs(av[1]);
+				_eputchar('\n');
+				_eputchar(BUF_FLUSH);
+				exit(127);
+			}
+			return (1);
 		}
-		idx++;
-
-		command = tokenizer(line);
-		if (!command)
-			continue;
-		if (is_builtin(command[0]))
-			handle_builtin(command, av, &status, idx);
-		else
-			status = _execute(command, av, idx);
+		info->readfd = fd;
 	}
-	if (command != NULL)
-	{
-		free(command);
-	}
+	_env_list(info);
+	read_history(info);
+	my_shell(info, av);
 	return (0);
 }
