@@ -16,7 +16,7 @@ int my_shell(info_t *info, char **av)
 	{
 		clear_info(info);
 		if (interactive(info))
-			write(1, "$ ", 2);
+			_puts("$ ");
 		_eputchar(BUF_FLUSH);
 		r = get_input(info);
 		if (r != -1)
